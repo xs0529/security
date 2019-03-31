@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xs.example.demo.permission.user.mapper.PermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xs.example.demo.permission.user.entity.Permission">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="symbol" property="symbol" />
+        <result column="pid" property="pid" />
+        <result column="type" property="type" />
+        <result column="url" property="url" />
+        <result column="enable" property="enable" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <resultMap id="allPermissionMap" type="com.xs.example.demo.permission.user.entity.Permission" extends="BaseResultMap">
+        <collection property="roleSet" ofType="com.xs.example.demo.permission.user.entity.Role">
+            <id column="r_id" property="id" />
+            <result column="r_name" property="name" />
+            <result column="symbol" property="symbol" />
+        </collection>
+    </resultMap>
+
+    <select id="allPermissionSet" resultMap="allPermissionMap">
+        SELECT
+            p.id,
+            p.name,
+            p.symbol,
+            p.pid,
+            p.type,
+            p.url,
+            p.enable,
+            p.create_time,
+            p.update_time,
+            r.id as r_id,
+            r.name as r_name,
+            r.symbol
+        FROM
+            sys_permission p
+        LEFT JOIN sys_role_permission rp ON p.id = rp.p_id
+        LEFT JOIN sys_role r ON r.id = rp.role_id
+        where r.is_del = false
+    </select>
+
+</mapper>
