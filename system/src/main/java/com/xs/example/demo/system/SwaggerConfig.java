@@ -3,6 +3,7 @@ package com.xs.example.demo.system;
 import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -27,14 +28,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /*@ConditionalOnProperty(name ="enabled" ,prefix = "swagger",havingValue = "true")*/
 @EnableSwaggerBootstrapUI
 @EnableSwagger2
+@ComponentScan("com.xs.example.demo.permission.user.rest")
 public class SwaggerConfig {
     @Bean
     public Docket createPlanApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                //.apis(RequestHandlerSelectors.basePackage("com.xs.example.demo.permission.user.rest"))
-                .apis(RequestHandlerSelectors.basePackage("com.xs.example.demo.web_common.base"))
+                .apis(RequestHandlerSelectors.basePackage("com.xs.example.demo.permission.user.rest"))
                 .paths(PathSelectors.any())
                 .build();
     }

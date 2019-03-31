@@ -1,13 +1,11 @@
 package com.xs.example.demo.permission.user.rest;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xs.example.demo.common.pojo.Result;
 import com.xs.example.demo.permission.user.entity.User;
 import com.xs.example.demo.permission.user.service.UserService;
 import com.xs.example.demo.web_common.base.BaseController;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,11 +24,6 @@ public class UserRest extends BaseController<User> {
     @Override
     public IService<User> getService() {
         return userService;
-    }
-
-    @GetMapping("/test")
-    public Result result(){
-        return Result.fail("asdasdadasdasdasdada");
     }
 
 }
