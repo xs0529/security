@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.xs.example.demo</groupId>
-            <artifactId>permission</artifactId>
+            <artifactId>web_common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
