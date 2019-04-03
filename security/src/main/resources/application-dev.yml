@@ -24,7 +24,7 @@ spring:
 
 
 mybatis-plus:
-  mapper-locations: classpath*:com/xs/example/demo/permission/user/mapper/xml/*.xml
+  mapper-locations: classpath*:com/xs/example/demo/security/user/mapper/xml/*.xml
 
 
 

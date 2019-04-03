@@ -1,27 +1,19 @@
-package com.xs.example.demo.system;
+package com.xs.example.demo.common.tree;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xs.example.demo.common.tree.TreeNode;
-import com.xs.example.demo.common.tree.TreeNode2;
-import com.xs.example.demo.common.tree.TreeUtil;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import com.xs.example.demo.common.test.TestMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class SystemApplicationTests {
+/**
+ * @author xieshuang
+ * @date 2019-04-03 21:31
+ */
+public class Test {
 
-    @Autowired
-    private TestMapper1 testMapper;
+    public static void main(String[] args) {
 
-    @Test
-    public void contextLoads() {
         int id = 1;
         List<TreeNode> treeNodeList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -52,9 +44,19 @@ public class SystemApplicationTests {
                 }
             }
         }
-        TreeUtil<TreeNode2> treeUtil = new TreeUtil(testMapper);
+        TreeUtil<TreeNode2> treeUtil = new TreeUtil(TestMapper.MAPPER);
+        long millis1 = System.currentTimeMillis();
         List<TreeNode2> tree = treeUtil.createTree(treeNodeList);
+        long millis2 = System.currentTimeMillis();
         System.out.println(JSONObject.toJSON(tree));
+        long millis3 = System.currentTimeMillis();
+        List<TreeNode> tree1 = TreeUtil.createDefaultTree(treeNodeList);
+        long millis4 = System.currentTimeMillis();
+        //System.out.println(JSONObject.toJSON(tree1));
+        long millis5 = System.currentTimeMillis();
+        System.out.println("生成树1 list用时："+ (millis2-millis1));
+        System.out.println("生成树1 json用时："+ (millis2-millis1));
+        System.out.println("生成树2 list用时："+ (millis4-millis3));
+        System.out.println("生成树2 json用时："+ (millis5-millis4));
     }
-
 }

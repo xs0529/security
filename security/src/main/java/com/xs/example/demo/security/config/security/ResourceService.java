@@ -1,7 +1,7 @@
 package com.xs.example.demo.security.config.security;
 
-import com.xs.example.demo.permission.user.entity.Permission;
-import com.xs.example.demo.permission.user.service.PermissionService;
+import com.xs.example.demo.security.user.entity.Permission;
+import com.xs.example.demo.security.user.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xs.example.demo.permission.user.mapper.RoleMapper">
+<mapper namespace="com.xs.example.demo.security.user.mapper.RoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.xs.example.demo.permission.user.entity.Role">
+    <resultMap id="BaseResultMap" type="com.xs.example.demo.security.user.entity.Role">
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="symbol" property="symbol" />
         <result column="is_del" property="isDel" />
     </resultMap>
-    <select id="listByUserId" resultType="com.xs.example.demo.permission.user.entity.Role">
+    <select id="listByUserId" resultType="com.xs.example.demo.security.user.entity.Role">
         SELECT
             r.id,
             r.name,

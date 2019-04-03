@@ -2,9 +2,9 @@ package com.xs.example.demo.security.config.security.login;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.xs.example.demo.security.config.security.MyUserDetails;
-import com.xs.example.demo.permission.user.entity.Role;
-import com.xs.example.demo.permission.user.entity.User;
-import com.xs.example.demo.permission.user.service.RoleService;
+import com.xs.example.demo.security.user.entity.Role;
+import com.xs.example.demo.security.user.entity.User;
+import com.xs.example.demo.security.user.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

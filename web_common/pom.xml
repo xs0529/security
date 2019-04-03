@@ -6,7 +6,6 @@
         <groupId>com.xs.example.demo</groupId>
         <artifactId>security_demo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.xs.example.demo</groupId>
     <artifactId>web_common</artifactId>
@@ -56,6 +55,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <classifier>exec</classifier>
+                </configuration>
             </plugin>
         </plugins>
     </build>

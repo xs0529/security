@@ -27,14 +27,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /*@ConditionalOnProperty(name ="enabled" ,prefix = "swagger",havingValue = "true")*/
 @EnableSwaggerBootstrapUI
 @EnableSwagger2
-@ComponentScan("com.xs.example.demo.permission.user.rest")
+@ComponentScan("com.xs.example.demo.security.user.rest")
 public class SwaggerConfig {
     @Bean
     public Docket createPlanApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.xs.example.demo.permission.user.rest"))
+                .apis(RequestHandlerSelectors.basePackage("com.xs.example.demo.security.user.rest"))
                 .paths(PathSelectors.any())
                 .build();
     }
