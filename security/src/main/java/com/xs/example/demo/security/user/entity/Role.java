@@ -1,14 +1,18 @@
 package com.xs.example.demo.security.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -16,40 +20,29 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author 谢霜
- * @since 2019-03-31
+ * @since 2019-04-07
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("sys_role")
+@ApiModel(value="Role对象", description="")
 public class Role extends Model<Role> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * id
-     */
+    @JsonSerialize(using= ToStringSerializer.class)
+    @ApiModelProperty(value = "id")
     @TableId("id")
     private Long id;
 
-    /**
-     * 角色名称
-     */
+    @ApiModelProperty(value = "角色名称")
     @TableField("name")
     private String name;
 
-    /**
-     * 角色代码，验证权限时使用
-     */
+    @ApiModelProperty(value = "角色代码，验证权限时使用")
     @TableField("symbol")
     private String symbol;
-
-    /**
-     * 是否删除
-     */
-    @TableField("is_del")
-    @TableLogic
-    private Boolean isDel;
 
 
     @Override

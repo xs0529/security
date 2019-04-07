@@ -1,12 +1,8 @@
 package com.xs.example.demo.system;
 
-import com.alibaba.fastjson.JSONObject;
 import com.xs.example.demo.common.tree.TreeNode;
-import com.xs.example.demo.common.tree.TreeNode2;
-import com.xs.example.demo.common.tree.TreeUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -16,9 +12,6 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SystemApplicationTests {
-
-    @Autowired
-    private TestMapper1 testMapper;
 
     @Test
     public void contextLoads() {
@@ -52,9 +45,6 @@ public class SystemApplicationTests {
                 }
             }
         }
-        TreeUtil<TreeNode2> treeUtil = new TreeUtil(testMapper);
-        List<TreeNode2> tree = treeUtil.createTree(treeNodeList);
-        System.out.println(JSONObject.toJSON(tree));
     }
 
 }

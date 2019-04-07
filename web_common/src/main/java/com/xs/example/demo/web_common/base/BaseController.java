@@ -2,7 +2,7 @@ package com.xs.example.demo.web_common.base;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xs.example.demo.common.pojo.Result;
+import com.xs.example.demo.web_common.pojo.vo.Result;
 import com.xs.example.demo.web_common.util.ValidUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

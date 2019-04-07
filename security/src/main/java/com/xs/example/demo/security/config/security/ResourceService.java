@@ -1,5 +1,6 @@
 package com.xs.example.demo.security.config.security;
 
+import com.xs.example.demo.security.config.security.Verification.MyFilterInvocationSecurityMetadataSource;
 import com.xs.example.demo.security.user.entity.Permission;
 import com.xs.example.demo.security.user.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ResourceService {
     @Autowired
     private PermissionService permissionService;
 
-    public LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>> loaderUrlAndRole() {
+    public LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>> getAllUrlAndRole() {
         LinkedHashMap<RequestMatcher, Collection<ConfigAttribute>> requestMap = new LinkedHashMap<>();
         Set<Permission> permissions = permissionService.allPermissionSet();
         if (!CollectionUtils.isEmpty(permissions)){
@@ -55,5 +56,10 @@ public class ResourceService {
         }else {
             return null;
         }
+    }
+
+    public void loaderUrlAndRole(){
+        // 加载访问路径需要的角色权限
+        MyFilterInvocationSecurityMetadataSource.loaderUrlAndRole(getAllUrlAndRole());
     }
 }

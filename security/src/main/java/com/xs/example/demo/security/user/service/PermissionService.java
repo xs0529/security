@@ -3,6 +3,7 @@ package com.xs.example.demo.security.user.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xs.example.demo.security.user.entity.Permission;
 
+import java.util.List;
 import java.util.Set;
 
 /**

@@ -56,7 +56,7 @@ public class TreeUtil<E extends BaseTree> {
         Iterator<TreeNode> nodeIterator = treeNodes.iterator();
         while (nodeIterator.hasNext()){
             TreeNode next = nodeIterator.next();
-            if (next.getPid()!=null && next.getPid()==treeNode.getId()){
+            if (next.getPid()!=null && next.getPid().equals(treeNode.getId())){
                 eList.add(addChildNode(next, treeNodes));
             }
         }
@@ -69,7 +69,7 @@ public class TreeUtil<E extends BaseTree> {
         Iterator<TreeNode> nodeIterator = treeNodes.iterator();
         while (nodeIterator.hasNext()){
             TreeNode next = nodeIterator.next();
-            if (next.getPid()!=null && next.getPid()==treeNode.getId()){
+            if (next.getPid()!=null && next.getPid().equals(treeNode.getId())){
                 treeNodeList.add(addDefaultChildNode(next, treeNodes));
             }
         }

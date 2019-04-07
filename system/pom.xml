@@ -30,6 +30,10 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-http</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.xs.example.demo</groupId>
             <artifactId>security</artifactId>
             <version>0.0.1-SNAPSHOT</version>

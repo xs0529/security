@@ -1,21 +1,22 @@
 package com.xs.example.demo.security.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xs.example.demo.web_common.common.validated.Insert;
+import com.xs.example.demo.web_common.common.validated.Update;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -23,72 +24,48 @@ import javax.validation.constraints.Size;
  * </p>
  *
  * @author 谢霜
- * @since 2019-03-31
+ * @since 2019-04-07
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("sys_user")
+@ApiModel(value="User对象", description="")
 public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * id
-     */
+    @ApiModelProperty(value = "id")
     @TableId("id")
+    @NotNull(groups = {Update.class}, message = "id不能为空")
     private Long id;
 
-    /**
-     * 用户名
-     */
+    @ApiModelProperty(value = "用户名")
     @TableField("username")
-    @NotNull(message = "用户名不能为空")
-    @Length(min = 6 ,max = 20, message = "用户名长度在6到20个字符")
+    @NotBlank(message = "用户名不能为空", groups = {Insert.class, Update.class})
     private String username;
 
-    /**
-     * 密码
-     */
+    @ApiModelProperty(value = "密码")
     @TableField("password")
-    @NotNull(message = "密码不能为空")
-    @Length(min = 6 ,max = 20, message = "密码长度在6到20个字符")
+    @JsonIgnore
     private String password;
 
-    /**
-     * 1启用，0禁用
-     */
+    @ApiModelProperty(value = "1启用，0禁用")
     @TableField("enable")
     private Boolean enable;
 
-    /**
-     * 创建时间
-     */
-    @ApiModelProperty(readOnly = true)
+    @ApiModelProperty(value = "创建时间")
     @TableField("create_time")
     private Date createTime;
 
-    /**
-     * 更新时间
-     */
+    @ApiModelProperty(value = "更新时间")
     @TableField("update_time")
-    @ApiModelProperty(readOnly = true)
     private Date updateTime;
 
-    /**
-     * 名称
-     */
+    @NotBlank(message = "名称不能为空", groups = {Insert.class, Update.class})
+    @ApiModelProperty(value = "名称")
     @TableField("name")
-    @NotNull(message = "名称不能为空")
     private String name;
-
-    /**
-     * 是否删除
-     */
-    @ApiModelProperty(hidden = true)
-    @TableField("is_del")
-    @TableLogic
-    private Boolean isDel;
 
 
     @Override

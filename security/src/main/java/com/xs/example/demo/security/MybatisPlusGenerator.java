@@ -1,4 +1,3 @@
-/*
 package com.xs.example.demo.security;
 
 import com.baomidou.mybatisplus.annotation.DbType;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-*/
 /**
  * mybatis-plus代码生成工具3.0版本
  * 详细配置：https://mp.baomidou.com/config/generator-config.html
@@ -22,42 +20,43 @@ import java.util.List;
  *             <artifactId>velocity</artifactId>
  *             <version>RELEASE</version>
  *         </dependency>
- *//*
+ **/
+
 
 public class MybatisPlusGenerator {
 
     public static void main(String[] args) {
 
         // 模块名
-        String module = "intelligent-building-service-middleware";
+        String module = "security";
         // 是否多模块项目
         boolean ISMODULE = true;
         // 包路径
         String packAge = MybatisPlusGenerator.class.getPackage().getName();
-        String PACKAGE1 = packAge+".report";
+        String PACKAGE1 = packAge+".user2";
         // 作者
         String AUTHOR = "谢霜";
         // 数据库url
-        String DATAURL = "47.107.79.3:3306";
+        String DATAURL = "127.0.0.1:3307";
         // 数据库用户名
         String USERNAME = "root";
         // 数据库密码
         String PASSWORD = "root";
         // 数据库名
-        String DATABASE = "building";
+        String DATABASE = "security_demo";
         // 逻辑删除字段，不要为null或者空
-        String logicDeleteFieldName = "deleted";
+        String logicDeleteFieldName = "";
         // 生成策略，ture：按照表名生成，false：按照表前缀生成
         // 需要生成的表，正则表达式匹配前缀
-        String tableName = "^building_device_report_.*";
+        String tableName = "^sys_.*";
         // 需要生成的表的前缀，生成后将不含前缀
-        String[] tableQ = new String[]{"building_"};
+        String[] tableQ = new String[]{"sys_"};
         // 是否生成 Controller CRUD代码
-        Boolean A = false;
+        Boolean A = true;
         // 是否使用 lombok
         Boolean C = true;
         // 是否使用 Swagger
-        Boolean D = false;
+        Boolean D = true;
         // 是否使用 restController
         Boolean E = true;
         // 时间类型对应策略
@@ -67,6 +66,7 @@ public class MybatisPlusGenerator {
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
+        gc.setFileOverride(false);
         gc.setDateType(dateType);
         gc.setOpen(false);
         gc.setSwagger2(D);
@@ -76,7 +76,6 @@ public class MybatisPlusGenerator {
         }else {
             gc.setOutputDir(projectPath + "/src/main/java");
         }
-        gc.setFileOverride(true);
         gc.setActiveRecord(true);
         // XML 二级缓存
         gc.setEnableCache(false);
@@ -109,9 +108,11 @@ public class MybatisPlusGenerator {
         strategy.setEntityLombokModel(C);
         strategy.setRestControllerStyle(E);
         strategy.setEntityTableFieldAnnotationEnable(true);
-        // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 表名生成策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
+        strategy.setSuperEntityClass("com.xs.example.demo.web_common.base.BaseEntity");
+        strategy.setSuperEntityColumns("id", "create_time", "update_time");
+
         mpg.setStrategy(strategy);
         // 注入自定义配置，可以在 VM 中使用 cfg.abc 【可无】
         List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
@@ -127,4 +128,3 @@ public class MybatisPlusGenerator {
         mpg.execute();
     }
 }
-*/

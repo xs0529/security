@@ -19,6 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.util.DigestUtils;
@@ -51,25 +52,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private TokenService tokenService;
     @Autowired
     private ResourceService resourceService;
-
-    @Bean
-    public static PasswordEncoder passwordEncoder() {
-       return new PasswordEncoder() {
-           @Override
-           public String encode(CharSequence rawPassword) {
-               return DigestUtils.md5DigestAsHex(rawPassword.toString().getBytes());
-           }
-
-           @Override
-           public boolean matches(CharSequence rawPassword, String encodedPassword) {
-               return encodedPassword.equals(DigestUtils.md5DigestAsHex(rawPassword.toString().getBytes()));
-           }
-       };
-    }
+    @Autowired
+    private MySecurityProperties properties;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(myUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
@@ -78,11 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry urlRegistry = http
                 .authorizeRequests();
 
-        urlRegistry.antMatchers("/**").permitAll();
-
-        /*if (enableswagger){
-            urlRegistry.antMatchers("/doc.html","/swagger-mg-ui/**","/swagger-resources/**","/document.html*","/webjars/**","/v2/**","/api/v2/**","/provider-base/v2/**").permitAll();
-        }*/
+        if (!properties.isEnableMySecurity()){
+            urlRegistry.antMatchers("/**").permitAll();
+        }
 
         urlRegistry
                 .and()
@@ -120,9 +106,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //自定义权限拒绝处理类
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
                 .and()
+                // FilterSecurityInterceptor是默认的权限处理过滤器，为了实现根据角色来控制路径的访问，需要在此之前进行处理，加载自己的FilterInvocationSecurityMetadataSource
                 .addFilterBefore(myFilterSecurityInterceptor,FilterSecurityInterceptor.class)
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()));
 
-        MyFilterInvocationSecurityMetadataSource.loaderUrlAndRole(resourceService.loaderUrlAndRole());
+        resourceService.loaderUrlAndRole();
     }
 }

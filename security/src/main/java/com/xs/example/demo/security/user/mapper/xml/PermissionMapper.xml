@@ -41,7 +41,6 @@
             sys_permission p
         LEFT JOIN sys_role_permission rp ON p.id = rp.p_id
         LEFT JOIN sys_role r ON r.id = rp.role_id
-        where r.is_del = false
     </select>
 
 </mapper>

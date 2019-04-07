@@ -1,6 +1,7 @@
 package com.xs.example.demo.security.config.security.login;
 
 import com.xs.example.demo.security.config.redis.RedisUtils;
+import com.xs.example.demo.security.config.security.MySecurityProperties;
 import com.xs.example.demo.web_common.util.ResponseUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -27,13 +28,10 @@ import java.io.IOException;
 @Component
 public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHandler {
 
-    @Value("${loginTimeLimit}")
-    private Integer loginTimeLimit;
-
-    @Value("${loginAfterTime}")
-    private Integer loginAfterTime;
     @Autowired
     private RedisUtils redisUtils;
+    @Autowired
+    private MySecurityProperties mySecurityProperties;
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
@@ -48,12 +46,12 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
             }
             //获取已登录错误次数
             int loginFailTime = Integer.parseInt(value);
-            int restLoginTime = loginTimeLimit - loginFailTime;
+            int restLoginTime = mySecurityProperties.getLoginTimeLimit() - loginFailTime;
             log.info("用户"+username+"登录失败，还有"+restLoginTime+"次机会");
             if(restLoginTime<=3&&restLoginTime>0){
                 ResponseUtils.out(response, ResponseUtils.resultMap(false,401,"用户名或密码错误，还有"+restLoginTime+"次尝试机会"));
             } else if(restLoginTime<=0) {
-                ResponseUtils.out(response, ResponseUtils.resultMap(false,401,"登录错误次数超过限制，请"+loginAfterTime+"分钟后再试"));
+                ResponseUtils.out(response, ResponseUtils.resultMap(false,401,"登录错误次数超过限制，请"+mySecurityProperties.getLoginAfterTime()+"分钟后再试"));
             } else {
                 ResponseUtils.out(response, ResponseUtils.resultMap(false,401,"用户名或密码错误"));
             }
@@ -77,10 +75,10 @@ public class AuthenticationFailHandler extends SimpleUrlAuthenticationFailureHan
         }
         //获取已登录错误次数
         int loginFailTime = Integer.parseInt(value) + 1;
-        redisUtils.set(key, String.valueOf(loginFailTime),loginAfterTime*60);
-        if(loginFailTime>=loginTimeLimit){
+        redisUtils.set(key, String.valueOf(loginFailTime),mySecurityProperties.getLoginAfterTime()*60);
+        if(loginFailTime>=mySecurityProperties.getLoginTimeLimit()){
 
-            redisUtils.set(flagKey, "fail", loginAfterTime*60);
+            redisUtils.set(flagKey, "fail", mySecurityProperties.getLoginAfterTime()*60);
             return false;
         }
         return true;

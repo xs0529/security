@@ -7,7 +7,6 @@
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="symbol" property="symbol" />
-        <result column="is_del" property="isDel" />
     </resultMap>
     <select id="listByUserId" resultType="com.xs.example.demo.security.user.entity.Role">
         SELECT
@@ -19,7 +18,7 @@
             LEFT JOIN sys_user_role ur ON u.id = ur.user_id
             LEFT JOIN sys_role r ON r.id = ur.role_id
         WHERE
-	    u.id = #{userId} and r.is_del = false
+	    u.id = #{userId}
     </select>
 
 </mapper>

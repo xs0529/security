@@ -21,21 +21,8 @@ spring:
     password: xs0529
     port: 6379
 
-
+enabled:
+  swagger: true
 
 mybatis-plus:
   mapper-locations: classpath*:com/xs/example/demo/security/user/mapper/xml/*.xml
-
-
-
-
-
-
-#登录失败5分钟后再登录
-loginAfterTime: 5
-#登录失败次数
-loginTimeLimit: 5
-#保存登录时长 7天
-saveLoginTime: 7
-#token过期时间 1小时
-tokenExpireTime: 1

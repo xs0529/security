@@ -3,6 +3,7 @@ package com.xs.example.demo.security.config.security.login;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.xs.example.demo.security.config.redis.RedisUtils;
+import com.xs.example.demo.security.config.security.MySecurityProperties;
 import com.xs.example.demo.security.config.security.jwt.MySecurityConstant;
 import com.xs.example.demo.security.config.security.jwt.TokenService;
 import com.xs.example.demo.web_common.util.ResponseUtils;
@@ -33,10 +34,8 @@ import java.util.UUID;
 @Component
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
-    @Value("${tokenExpireTime}")
-    private Integer tokenExpireTime;
-    @Value("${saveLoginTime}")
-    private Integer saveLoginTime;
+    @Autowired
+    private MySecurityProperties mySecurityProperties;
     @Autowired
     private RedisUtils redisUtils;
     @Autowired
@@ -45,6 +44,8 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        Integer tokenExpireTime = mySecurityProperties.getTokenExpireTime();
+        Integer saveLoginTime = mySecurityProperties.getSaveLoginTime();
         //用户选择保存登录状态几天
         String saveTime = request.getParameter(MySecurityConstant.SAVE_LOGIN);
         if(StringUtils.isNotBlank(saveTime)&&Boolean.valueOf(saveTime)){

@@ -1,6 +1,7 @@
 package com.xs.example.demo.system;
 
 import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 //swagger-bootstrap-ui默认访问地址是：http://${host}:${port}/doc.html
 @Configuration
-/*@ConditionalOnProperty(name ="enabled" ,prefix = "swagger",havingValue = "true")*/
+@ConditionalOnProperty(prefix = "enabled",name ="swagger",havingValue = "true")
 @EnableSwaggerBootstrapUI
 @EnableSwagger2
 @ComponentScan("com.xs.example.demo.security.user.rest")

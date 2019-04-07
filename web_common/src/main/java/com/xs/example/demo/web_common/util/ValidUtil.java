@@ -1,6 +1,6 @@
 package com.xs.example.demo.web_common.util;
 
-import com.xs.example.demo.common.pojo.Result;
+import com.xs.example.demo.web_common.pojo.vo.Result;
 import org.springframework.validation.BindingResult;
 
 /**
