@@ -2,11 +2,10 @@ package com.xs.example.demo.security.user.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xs.example.demo.security.user.entity.Role;
 import com.xs.example.demo.security.user.entity.RolePermission;
-import com.xs.example.demo.security.user.entity.UserRole;
 import com.xs.example.demo.security.user.mapper.RoleMapper;
 import com.xs.example.demo.security.user.pojo.AddRolePermissionDTO;
 import com.xs.example.demo.security.user.service.RoleService;
-import com.xs.example.demo.web_common.exception.MyRuntimeException;
+import com.xs.example.demo.web_common.common.exception.MyRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

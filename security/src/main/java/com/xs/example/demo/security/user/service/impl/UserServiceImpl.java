@@ -6,7 +6,7 @@ import com.xs.example.demo.security.user.entity.UserRole;
 import com.xs.example.demo.security.user.mapper.UserMapper;
 import com.xs.example.demo.security.user.pojo.AddUserRoleDTO;
 import com.xs.example.demo.security.user.service.UserService;
-import com.xs.example.demo.web_common.exception.MyRuntimeException;
+import com.xs.example.demo.web_common.common.exception.MyRuntimeException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

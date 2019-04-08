@@ -1,4 +1,4 @@
-package com.xs.example.demo.web_common.exception;
+package com.xs.example.demo.web_common.common.exception;
 
 import com.xs.example.demo.web_common.pojo.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.xs.example.demo.web_common.exception;
+package com.xs.example.demo.web_common.common.exception;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
